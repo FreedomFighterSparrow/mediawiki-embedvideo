@@ -272,6 +272,7 @@ class EmbedVideoHooks {
 	 * @return	boolean	Valid
 	 */
 	static private function setAlignment($alignment) {
+		$alignment = ($alignment === 'auto') ? null : $alignment;	// BC
 		if (!empty($alignment) && ($alignment == 'left' || $alignment == 'right' || $alignment == 'center')) {
 			self::$alignment = $alignment;
 		} elseif (!empty($alignment)) {
