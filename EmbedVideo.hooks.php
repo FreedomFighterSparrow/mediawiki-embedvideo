@@ -160,7 +160,7 @@ class EmbedVideoHooks {
 	 * @param	string	[Optional] Extra URL Arguments
 	 * @return	string	Encoded representation of input params (to be processed later)
 	 */
-	static public function parseEV($parser, $service = null, $id = null, $dimensions = null, $alignment = null, $description = null, $container = null, $urlArgs = null) {
+	static public function parseEV(Parser $parser, $service = null, $id = null, $dimensions = null, $alignment = null, $description = null, $container = null, $urlArgs = null) {
 		self::resetParameters();
 
 		$service		= trim($service);
@@ -226,7 +226,7 @@ class EmbedVideoHooks {
 
 		$html = self::generateWrapperHTML($html);
 
-		$parser->getOutput()->addModuleStyles(array('ext.embedVideo'));
+		$parser->getOutput()->addModuleStyles( 'ext.embedVideo' );
 
 		return array(
 			$html,
