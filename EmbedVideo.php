@@ -24,7 +24,7 @@ $wgExtensionCredits['parserhook'][] = array(
 	'name'				=> 'EmbedVideo',
 	'author'			=> array('Jim R. Wilson', 'Andrew Whitworth', 'Alexia E. Smith'),
 	'url'				=> 'http://www.mediawiki.org/wiki/Extension:EmbedVideo',
-	'version'			=> '2.2.1',
+	'version'			=> '2.2.5',
 	'descriptionmsg'	=> 'embedvideo_description'
 );
 
@@ -54,4 +54,3 @@ if (!isset($wgEmbedVideoDefaultWidth) && (isset($_SERVER['HTTP_X_MOBILE']) && $_
 	//Set a smaller default width when in mobile view.
 	$wgEmbedVideoDefaultWidth = 320;
 }
-?>

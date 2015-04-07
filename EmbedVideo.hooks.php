@@ -245,15 +245,12 @@ class EmbedVideoHooks {
 	 * @return string
 	 */
 	static private function generateWrapperHTML($html, $description = null) {
-		$wrapperClasses = 'embedvideo';
-		$wrapperClasses .= self::getContainer() == 'frame' ? ' frame' : '';
-		$wrapperClasses .= self::getAlignment() !== false ? " ev_".self::getAlignment() : '';
-
-		$desc = self::getDescription() !== false ?
-			"<div class='caption'>".self::getDescription()."</div>" : '';
-
-		$html = "<div class='{$wrapperClasses}'>{$html}{$desc}</div>";
-
+		if (self::getContainer() == 'frame') {
+			$html = "<div class='thumb embedvideo".(self::getAlignment() !== false ? " t".self::getAlignment() : null)."'".(self::getAlignment() !== false ? "style='width: ".(self::$service->getWidth() + 6)."px;'" : null)."><div class='thumbinner' style='width: ".self::$service->getWidth()."px;'>{$html}".(self::getDescription() !== false ? "<div class='thumbcaption'>".self::getDescription()."</div>" : null)."</div></div>";
+		} else {
+			//Normally I would avoid inline styles, but it is necessary in this case for center alignment as the stylesheet can not be dynamically modified.
+			$html = "<div class='embedvideo ".(self::getAlignment() !== false ? " ev_".self::getAlignment() : null)."' style='width: ".self::$service->getWidth()."px;'>{$html}".(self::getDescription() !== false ? "<div class='thumbcaption'>".self::getDescription()."</div>" : null)."</div>";
+		}
 		return $html;
 	}
 
@@ -361,4 +358,3 @@ class EmbedVideoHooks {
 		return "<div class='errorbox'>{$message}</div>";
 	}
 }
-?>
