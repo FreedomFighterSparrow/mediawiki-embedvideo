@@ -208,9 +208,9 @@ class VideoService {
 				'#tudou.com/listplay/([\d\w-]+)/([\d\w-]+).html#is',
 				'#tudou.com/listplay/([\d\w-]+).html#is'
 			),
-			'id_regex'		=> [
+			'id_regex'		=> array(
 				'#^([\d\w-]+)$#is'
-			]
+			)
 		),
 		'twitch' => array(
 			'embed'			=> '<iframe src="http://www.twitch.tv/%1$s/embed" width="%2$d" height="%3$d" frameborder="0" allowfullscreen="true"></iframe>',
