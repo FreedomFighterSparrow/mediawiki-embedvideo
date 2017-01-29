@@ -12,12 +12,14 @@ div.embedvideo.ev_center > .embedvideowrap {
 div.embedvideo.ev_left {
 	clear: left;
 	float: left;
+	margin-right: 15px;
 }
 
 /* @noflip */
 div.embedvideo.ev_right {
 	clear: right;
 	float: right;
+	margin-left: 15px;
 }
 
 div.embedvideo.ev_inline {
@@ -53,4 +55,23 @@ a.vplink {
 
 a.vplink:hover {
 	background-image: url(../img/play-hover.png);
+}
+
+/* WikiRights override - frame rule based on Bootstrap's .thumbnail (v3.3.5) */
+.embedvideo.thumb {
+	display: block;
+	padding: 4px;
+	line-height: 1.428571429;
+	background-color: #ffffff;
+	border: 1px solid #dddddd;
+	border-radius: 4px;
+	-webkit-transition: all 0.2s ease-in-out;
+	transition: all 0.2s ease-in-out;
+	max-width: 100%;
+	height: auto;
+}
+
+.embedvideo .thumbcaption {
+	padding: 4px 9px;
+	color: #333333;
 }
