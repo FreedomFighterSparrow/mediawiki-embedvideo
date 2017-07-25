@@ -1,6 +1,6 @@
 {
 	"name": "EmbedVideo",
-	"version": "2.6.0",
+	"version": "2.7.0",
 	"author": [
 		"Jim R. Wilson",
 		"Andrew Whitworth",
@@ -70,6 +70,9 @@
 		"remoteExtPath": "EmbedVideo"
 	},
 	"config": {
+		"EmbedVideoAddFileExtensions": true,
+		"EmbedVideoEnableVideoHandler": true,
+		"EmbedVideoEnableAudioHandler": true,
 		"FFmpegLocation": "/usr/bin/ffmpeg",
 		"FFprobeLocation": "/usr/bin/ffprobe"
 	},

@@ -1,4 +1,4 @@
-#About
+# About
 
 The EmbedVideo Extension is a MediaWiki extension which adds a parser function called #ev for embedding video clips from over 22 popular video sharing services in multiple languages and countries.  It also adds video and audio media handlers to support transforming standard `[[File:Example.mp4]]` file links into embedded HTML5 `<video>` and `<audio>` tags.
 
@@ -14,13 +14,13 @@ The MediaWiki extension page is located at:
 
 https://www.mediawiki.org/wiki/Extension:EmbedVideo
 
-##History
+## History
 
 The original version of EmbedVideo was created by Jim R. Wilson.  That version was later forked by Mohammed Derakhshani as the EmbedVideoPlus extension.  In early 2010 Andrew Whitworth took over active maintenance of both extensions and merged them together as "EmbedVideo".  Much later on in September 2014 Alexia E. Smith forcefully took over being unable to contact a current maintainer.
 
 The newer versions of EmbedVideo are intended to be fully backwards-compatible with both older EmbedVideo and EmbedVideoPlus extensions.
 
-#License
+# License
 
 EmbedVideo is released under the MIT license
 
@@ -28,9 +28,9 @@ http://www.opensource.org/licenses/mit-license.php
 
 See LICENSE for more details
 
-#Installation
+# Installation
 
-##Download
+## Download
 
 There are three places to download the EmbedVideo extension. The first is directly from its GitHub project page, where active development takes place.  If you have git, you can use this incantation to check out a read-only copy of the extension source:
 
@@ -40,7 +40,7 @@ git clone https://github.com/HydraWiki/mediawiki-embedvideo.git
 
 Downloadable archive packages for numbered releases will also be available from the github project page.
 
-##Installation Instructions
+## Installation Instructions
 
 1. Download the contents of the extension, as outlined above.
 2. Create an EmbedVideo folder in the extensions/ folder of your MediaWiki installation.
@@ -58,7 +58,7 @@ For Mediawiki 1.24 and up add the following line to your LocalSettings.php:
 wfLoadExtension("EmbedVideo");
 ```
 
-#Usage
+# Usage
 
 ## Media Handler
 For locally uploaded content the process for displaying it on a page is the same as an image.  [See the image syntax documentation](https://www.mediawiki.org/wiki/Help:Images#Syntax) on MediaWiki.org for complete reference on this feature.
@@ -112,6 +112,11 @@ The \#evu parser tag is like the \#evt tag, but its first parameter is a URL tha
 Videos can easily be embedded with the &lt;embedvideo&gt;&lt;/embedvideo&gt; tag hook. The ID/URL goes as the input between the tags and parameters can be added as the tag arguments.
 
     <embedvideo service="youtube">https://www.youtube.com/watch?v=pSsYTj9kCHE</embedvideo>
+
+
+Alternativly, you can also use the service id as the tag (assuming another extension isn't already using this tag).
+
+    <youtube>https://www.youtube.com/watch?v=pSsYTj9kCHE</youtube>
 
 ## Attributes for Parser Tags
 
@@ -224,6 +229,7 @@ As of version 2.x, EmbedVideo supports embedding video content from the followin
 | [Metacafe](http://www.metacafe.com/)                     | `metacafe`                                                                            | 11404579                                                                              | http://www.metacafe.com/watch/11404579/lan\_party\_far\_cry\_4/                                                |
 | [Nico Nico Video](http://www.nicovideo.jp/)              | `nico`                                                                                | sm24394325                                                                            | http://www.nicovideo.jp/watch/sm24394325                                                                       |
 | [RuTube](http://rutube.ru/)                              | `rutube`                                                                              | b698163ccb67498db74d50cb0f22e556                                                      | http://rutube.ru/video/b698163ccb67498db74d50cb0f22e556/                                                       |
+| [SoundCloud](http://soundcloud.com/)                     | `soundcloud`                                                                          |                                                                                       | https://soundcloud.com/skrillex/skrillex-rick-ross-purple-lamborghini                                                     |
 | [TeacherTube](http://teachertube.com)                    | `teachertube`                                                                         | 370511                                                                                | http://www.teachertube.com/video/thats-a-noun-sing-along-hd-version-370511                                     |
 | [TED Talks](http://www.ted.com/talks/browse/)            | `ted`                                                                                 | bruce\_aylward\_humanity\_vs\_ebola\_the\_winning\_strategies\_in\_a\_terrifying\_war | http://www.ted.com/talks/bruce\_aylward\_humanity\_vs\_ebola\_the\_winning\_strategies\_in\_a\_terrifying\_war |
 | [Tubi TV](http://tubitv.com)                             | `tubitv`                                                                              | 318409                                                                                | http://tubitv.com/video/318409                                                                                 |
@@ -236,17 +242,20 @@ As of version 2.x, EmbedVideo supports embedding video content from the followin
 | [YouTube](http://www.youtube.com/)                       | `youtube` - Single Videos                                                             | `youtubeplaylist` - Playlists                                                         | pSsYTj9kCHE                                                                                                    |
 | [Youku](http://www.youku.com/)                           | `youku`                                                                               | XODc3NDgzMTY4                                                                         | http://v.youku.com/v\_show/id\_XODc3NDgzMTY4.html                                                              |
 
-#Configuration Settings
+# Configuration Settings
 
-| Variable                  | Default Value    | Description                                                                                                                                             |
-|---------------------------|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| $wgEmbedVideoMinWidth     |                  | Integer - Minimum width of video players. Widths specified below this value will be automatically bounded to it.                                        |
-| $wgEmbedVideoMaxWidth     |                  | Integer - Maximum width of video players. Widths specified above this value will be automatically bounded to it.                                        |
-| $wgEmbedVideoDefaultWidth |                  | Integer - Globally override the default width of video players. When not set this uses the video service's default width which is typically 640 pixels. |
-| $wgFFmpegLocation         | /usr/bin/ffmpeg  | String - Set the location of the ffmpeg binary.                                                                                                         |
-| $wgFFprobeLocation        | /usr/bin/ffprobe | String - Set the location of the ffprobe binary.                                                                                                        |
+| Variable                        | Default Value    | Description                                                                                                                                             |
+|---------------------------------|------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
+| $wgEmbedVideoAddFileExtensions  | true             | Boolean - Enable or disable adding video/audio file extensions to the list of allowable files to be uploaded.                                           |
+| $wgEmbedVideoEnableVideoHandler | true             | Boolean - Enable or disable the video media handlers for displaying embedded video in articles.                                                         |
+| $wgEmbedVideoEnableAudioHandler | true             | Boolean - Enable or disable the audio media handlers for displaying embedded audio in articles.                                                         |
+| $wgEmbedVideoDefaultWidth       |                  | Integer - Globally override the default width of video players. When not set this uses the video service's default width which is typically 640 pixels. |
+| $wgEmbedVideoMinWidth           |                  | Integer - Minimum width of video players. Widths specified below this value will be automatically bounded to it.                                        |
+| $wgEmbedVideoMaxWidth           |                  | Integer - Maximum width of video players. Widths specified above this value will be automatically bounded to it.                                        |
+| $wgFFmpegLocation               | /usr/bin/ffmpeg  | String - Set the location of the ffmpeg binary.                                                                                                         |
+| $wgFFprobeLocation              | /usr/bin/ffprobe | String - Set the location of the ffprobe binary.                                                                                                        |
 
-#Credits
+# Credits
 
 The original version of EmbedVideo was written by Jim R. Wilson.  Additional major upgrades made by Andrew Whitworth, Alexia E. Smith, and other contributors.
 
