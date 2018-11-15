@@ -1,4 +1,19 @@
 ## Patch Notes
+### v2.7.4
+* Added support for playlist to evlplayer
+* Added support for youtube video list
+* Updated Documentation for evlplayer
+* Added missing dependency for evlplayer in extension.json
+
+### v2.7.3
+* Default Twitch VOD to autoplay=false by default
+* Allow videos to be sized in 1:1 aspect ratios for special use cases.
+
+### v2.7.2
+* Added feature to evlplayer to allow default video content
+
+### v2.7.1
+* Fixed issue with youku videos not embedding properly on https enabled wikis.
 
 ### v2.7.0
 * Added SoundCloud support

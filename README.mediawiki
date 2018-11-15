@@ -4,18 +4,20 @@
 |status      = stable
 |type        = parser function
 |author      = Alexia E. Smith ([[User:Alexia E. Smith|Alexia E. Smith]]), Andrew Whitworth ([[User:Whiteknight|Whiteknight]]), Jim R. Wilson ([[User:Jimbojw|Jimbojw]]), and Mohammad Derakhshani ([[User:Mderakhs|Mderakhs]])
-|version     = 2.7.0
-|update      = 2017-05-08
+|version     = 2.7.4
+|update      = 2018-07-16
 |mediawiki   = 1.25+
-|php         = 5.4+(5.3 up to EmbedVideo 2.2.1)
+|php         = 5.4+
 |download    = {{TNT|GithubDownload|HydraWiki|mediawiki-embedvideo}}
+|image       = EmbedVideoExample1.jpg
+|imagesize   = 350px
 |hook1       = ParserFirstCallInit
 |description = Adds a parser function called <code>#ev</code> for embedding video clips from popular video sharing services.
 |example     = [http://help.gamepedia.com/Extension:EmbedVideo/Example Gamepedia Help Wiki]
 |vagrant-role      = embedvideo
 }}
 
-The '''EmbedVideo''' Extension is a MediaWiki extension which adds a parser function called <code>#ev</code> for embedding video clips from over 24 popular video sharing services in multiple languages and countries.  It also adds video and audio media handlers to support transforming standard <nowiki>[[File:Example.mp4]]</nowiki> file links into embedded HTML5 <nowiki><video></nowiki> and <nowiki><audio></nowiki> tags.
+The '''EmbedVideo''' extension adds a parser function called <code>#ev</code> for embedding video clips from over 24 popular video sharing services in multiple languages and countries.  It also adds video and audio media handlers to support transforming standard <nowiki>[[File:Example.mp4]]</nowiki> file links into embedded HTML5 <nowiki><video></nowiki> and <nowiki><audio></nowiki> tags.
 
 ;Project Homepage: [https://github.com/HydraWiki/mediawiki-embedvideo Documentation at Github]
 ;Source Code: [https://github.com/HydraWiki/mediawiki-embedvideo Source code at Github]
@@ -28,7 +30,8 @@ The '''EmbedVideo''' Extension is a MediaWiki extension which adds a parser func
 
 {{TNT|ExtensionInstall
  |registration=required
- |download-link=[https://github.com/HydraWiki/mediawiki-embedvideo/archive/v2.7.0.zip Download]
+ |download-link=[https://github.com/HydraWiki/mediawiki-embedvideo/archive/v2.7.3.zip Download]
+ |custom-steps=* [[#Configuration|Configure as required]]
 }}
 
 ==Usage==
@@ -36,7 +39,7 @@ The '''EmbedVideo''' Extension is a MediaWiki extension which adds a parser func
 === Media Handler ===
 For locally uploaded content the process for displaying it on a page is the same as an image.  [https://www.mediawiki.org/wiki/Help:Images#Syntax See the image syntax documentation] on MediaWiki.org for complete reference on this feature.
 
-This example would display a video in page using a HTML5 `<video>` tag.
+This example would display a video in page using a HTML5 <code><nowiki><video></nowiki></code> tag.
 
 <pre><nowiki>[[File:Example.mp4]]</nowiki></pre>
 
@@ -48,7 +51,7 @@ To specify the start and end timestamps in the media use the start and end param
 
 The EmbedVideo parser function expects to be called in any of the following ways:
 
-====#ev - Classic Parser Tag====
+====<code>#ev</code> - Classic Parser Tag====
 * <code><nowiki>{{#ev:service|id}}</nowiki></code>
 * <code><nowiki>{{#ev:service|id|dimensions}}</nowiki></code>
 * <code><nowiki>{{#ev:service|id|dimensions|alignment}}</nowiki></code>
@@ -61,7 +64,7 @@ The EmbedVideo parser function expects to be called in any of the following ways
 However, if needed optional arguments may be left blank by not putting anything between the pipes:
 * <code><nowiki>{{#ev:service|id|||description}}</nowiki></code>
 
-====#evt - Parser Tag for Templates====
+====<code>#evt</code> - Parser Tag for Templates====
 The <nowiki>#evt</nowiki> parser tag allows for key=value pairs which allows for easier templating and readability.
 
 <pre><nowiki>{{#evt:
@@ -70,14 +73,14 @@ service=youtube
 |alignment=right
 }}</nowiki></pre>
 
-====#evu - Parser Tag for URLs====
+====<code>#evu</code> - Parser Tag for URLs====
 The <nowiki>#evu</nowiki> parser tag is like the <nowiki>#evt</nowiki> tag, but its first parameter is a URL that will be parsed to determine the service automatically.
 
 <pre><nowiki>{{#evu:https://www.youtube.com/watch?v=pSsYTj9kCHE
 |alignment=right
 }}</nowiki></pre>
 
-====<embedvideo> - Tag Hook====
+====<code><embedvideo></code> - Tag Hook====
 Videos can easily be embedded with the <nowiki><embedvideo></embedvideo></nowiki> tag hook.  The ID/URL goes as the input between the tags and parameters can be added as the tag arguments.
 
 <pre><nowiki><embedvideo service="youtube">https://www.youtube.com/watch?v=pSsYTj9kCHE</embedvideo></nowiki></pre>
@@ -163,7 +166,7 @@ URL arguments can be used to chop up a video and loop it:
 <pre>https://www.youtube.com/watch?v=pSsYTj9kCHE&start=160&end=180&loop=1</pre>
 <pre>{{#ev:youtube|https://www.youtube.com/watch?v=pSsYTj9kCHE|||||start=160&end=180&loop=1}}</pre>
 
-= Support for VideoLink Tags =
+== Support for VideoLink Tags ==
 
 Support for the unmaintained VideoLink extension’s tags has been added since version 2.5.
 
@@ -171,15 +174,20 @@ From the original extension documentation:
 
 <pre>The VideoLink extension allows embedding of YouTube videos in articles; allowing for multiple linked videos to be played in a single embedded video player, first shown when a user clicks on a video link.
 
-The &lt;vplayer /&gt; specifies where the player should appear within the page, and the {{#vlink}} parser function allows creation of links that load a specific video.</pre>
-=== &lt;evlplayer&gt; - Tag Hook for Video Container ===
+The &lt;evlplayer /&gt; specifies where the player should appear within the page, and the {{#vlink}} parser function allows creation of links that load a specific video.</pre>
+=== <code>&lt;evlplayer&gt;</code> - Tag Hook for Video Container ===
 
-''Note that the use of the <code>&lt;vplayer&gt;</code> tag is also acceptable here for backwards compatibility.''
+''Note that the use of the <code>&lt;evlplayer&gt;</code> tag is also acceptable here for backwards compatibility.''
 
 This evlplayer tag is used to position the video player container within the page.
 
-<pre>&lt;vplayer id=&quot;player id&quot; w=&quot;width&quot; h=&quot;height&quot; class=&quot;class&quot; style=&quot;style&quot;&gt;default content&lt;/vplayer&gt;</pre>
-{|
+<pre>&lt;evlplayer id=&quot;player id&quot; w=&quot;width&quot; h=&quot;height&quot; class=&quot;class&quot; style=&quot;style&quot;&gt;default content&lt;/evlplayer&gt;</pre>
+
+A default video can be set to fill the container by default instead of default content as well.
+
+<pre>&lt;evlplayer id=&quot;player1&quot; w=&quot;480&quot; h=&quot;360&quot; service=&quot;youtube&quot; defaultid=&quot;pSsYTj9kCHE&quot; /&gt;</pre>
+
+{| class="wikitable"
 !width="11%"| Attributes
 !width="10%"| Required
 !width="23%"| Default
@@ -203,26 +211,34 @@ This evlplayer tag is used to position the video player container within the pag
 | class
 | no
 |
-
 | Additional CSS class to add to the container div
 |-
 | style
 | no
 |
-
 | Additional in-line CSS to apply to the container div
+|-
+| defaultid
+| no
+|
+| Video ID of default video, if you want a default video.
+|-
+| service
+| no
+|
+| Service of default video, if you want a default video.
 |}
 
 An important caveat to make note of, is that the <code>w</code> and <code>h</code> attributes only effect the video that is being included into the container div, and not the actual container. For styling of the container, please use the <code>class</code> or <code>style</code> attributes.
 
-=== #evl - Parser Function for Video Links ===
+=== <code>#evl</code> - Parser Function for Video Links ===
 
 ''Note that the use of the <code>{{#vlink}}</code> parser function is also acceptable here for backwards compatibility.''
 
-<pre>{{#evl:&lt;video id&gt;|&lt;Link text&gt;|service=youtube|player=&lt;player id&gt;}}</pre>
+<pre>{{#evl:&lt;video id&gt;|&lt;Link text&gt;&gt;|&lt;video to play&gt;|service=youtube|player=&lt;player id&gt;}}</pre>
 In addition to all of the attributes supported by the <code>#evt</code> tag, these specific attributes apply to the <code>#evl</code> (and <code>#vlink</code>) tags. To maintain backwards compatibility, if you do not define a <code>service</code> then <code>youtube</code> is assumed.
 
-{|
+{|class="wikitable"
 !width="5%"| Attributes
 !width="4%"| Required
 !width="3%"| Default
@@ -231,12 +247,17 @@ In addition to all of the attributes supported by the <code>#evt</code> tag, the
 | video id
 | yes
 | none
-| The ID of the video you would like to play. ''Please note that the use of multiple video IDs separated by a semicolon is now deprecated. Please use the proper service for playlists if you would like play multiple videos from a single link''
+| The ID of the video you would like to play or a comma separated list of videos to play. ''Please note that the use of multiple video IDs separated by a semicolon is now deprecated.'' 
 |-
 | link text
 | yes
 | none
 | The text to display inside the link
+|-
+| video to play
+| no
+| none
+| The number that represents the video to play from video id if its is a comma separated list of ids.
 |-
 | player
 | no
@@ -255,7 +276,17 @@ In addition to all of the attributes supported by the <code>#evt</code> tag, the
 | In the original VideoLink, this defined the start time of a video. Since we support multiple video services, this feature can now be replicated with the <code>urlargs</code> parameter. For backwards compatibility, this attribute will be respect on videos with the service <code>youtube</code>.
 |}
 
-=== Supported Services ===
+=== Video link Examples ===
+
+Creating a video list allows video links to create a playlist on the fly using the ''youtube'' and ''youtubevideolist'' service. ''Note: even if you define a service the system will use youtube if a list of videos is provided.''
+
+<pre>&lt;evlplayer id=&quot;player id&quot; w=&quot;width&quot; h=&quot;height&quot; class=&quot;class&quot; style=&quot;style&quot; id=&quot;example-player&quot;&gt;default content&lt;/evlplayer&gt;</pre>
+<pre>{{#evl:pSsYTj9kCHE,pSsYTj9kCHE,pSsYTj9kCHE|Play All|player=example-player}}</pre>
+<pre>{{#evl:pSsYTj9kCHE,pSsYTj9kCHE,pSsYTj9kCHE|Let eet Go|1|player=example-player}}</pre>
+<pre>{{#evl:pSsYTj9kCHE,pSsYTj9kCHE,pSsYTj9kCHE|Let eet Go|2|player=example-player}}</pre>
+<pre>{{#evl:pSsYTj9kCHE,pSsYTj9kCHE,pSsYTj9kCHE|Let eet Go|3|player=example-player}}</pre>
+
+== Supported Services ==
 
 As of version 2.x, EmbedVideo supports embedding video content from the following services:
 {| class="wikitable"
@@ -416,9 +447,11 @@ As of version 2.x, EmbedVideo supports embedding video content from the followin
 ! [http://www.youtube.com/ YouTube]
 | <code>youtube</code> - Single Videos
 | <code>youtubeplaylist</code> - Playlists
+| <code>youtubevideolist</code> - Video List
 | <nowiki>pSsYTj9kCHE</nowiki>
 | <nowiki>https://www.youtube.com/watch?v=pSsYTj9kCHE</nowiki>
   <nowiki>https://www.youtube.com/watch?v=CW_PbErQ_c8&list=PL76E80C7F756A2047</nowiki>
+  <nowiki>https://www.youtube.com/watch?v=CW_PbErQ_c8&playlist=CW_PbErQ_c8,CW_PbErQ_c8</nowiki>
 |-
 ! [http://www.youku.com/ Youku]
 | colspan="2"|<code>youku</code>
@@ -427,7 +460,7 @@ As of version 2.x, EmbedVideo supports embedding video content from the followin
 |-
 |}
 
-==Configuration Settings==
+==Configurations==
 
 {| class="wikitable"
 |--
@@ -435,40 +468,56 @@ As of version 2.x, EmbedVideo supports embedding video content from the followin
 ! Default Value
 ! Description
 |--
-| $wgEmbedVideoAddFileExtensions
-| true
+| <code>$wgEmbedVideoAddFileExtensions</code>
+| <code>true</code>
 | Boolean - Enable or disable adding video/audio file extensions to the list of allowable files to be uploaded.
 |--
-| $wgEmbedVideoEnableVideoHandler
-| true
+| <code>$wgEmbedVideoEnableVideoHandler</code>
+| <code>true</code>
 | Boolean - Enable or disable the video media handlers for displaying embedded video in articles.
 |--
-| $wgEmbedVideoEnableAudioHandler
-| true
+| <code>$wgEmbedVideoEnableAudioHandler</code>
+| <code>true</code>
 | Boolean - Enable or disable the audio media handlers for displaying embedded audio in articles.
 |--
-| $wgEmbedVideoDefaultWidth
-|
+| <code>$wgEmbedVideoDefaultWidth</code>
+| <code>''</code>
 | Integer - Globally override the default width of video players.  When not set this uses the video service's default width which is typically 640 pixels.
 |--
-| $wgEmbedVideoMinWidth
-|
+| <code>$wgEmbedVideoMinWidth</code>
+| <code>''</code>
 | Integer - Minimum width of video players.  Widths specified below this value will be automatically bounded to it.
 |--
-| $wgEmbedVideoMaxWidth
-|
+| <code>$wgEmbedVideoMaxWidth</code>
+| <code>''</code>
 | Integer - Maximum width of video players.  Widths specified above this value will be automatically bounded to it.
 |--
-| $wgFFmpegLocation
-| /usr/bin/ffmpeg
+| <code>$wgFFmpegLocation</code>
+| <code>/usr/bin/ffmpeg</code>
 | String - Set the location of the ffmpeg binary.
 |--
-| $wgFFprobeLocation
-| /usr/bin/ffprobe
+| <code>$wgFFprobeLocation</code>
+| <code>/usr/bin/ffprobe</code>
 | String - Set the location of the ffprobe binary.
 |}
 
-==Patch Notes==
+==Version history==
+; v2.7.4
+* Added support for playlist to evlplayer
+* Added support for youtube video list
+* Updated Documentation for evlplayer
+* Added missing dependency for evlplayer in extension.json
+
+; v2.7.3
+* Default Twitch VOD to autoplay=false by default
+* Allow videos to be sized in 1:1 aspect ratios for special use cases.
+
+; v2.7.2
+* Added feature to evlplayer to allow default video content
+
+; v2.7.1
+* Fixed issue with youku videos not embedding properly on https enabled wikis.
+
 ; v2.7.0
 * Added SoundCloud support
 * Added ability to use service name as a parser tag (if not defined previously)
@@ -536,7 +585,7 @@ As of version 2.x, EmbedVideo supports embedding video content from the followin
 ; v2.3.0
 * Hard cut off of support for versions older then MediaWiki 1.25
 * Auto Resize attribute added
-* Reverted array_key_exists() regression to fix the `<embedvideo>` tag being broken.
+* Reverted array_key_exists() regression to fix the <code><nowiki><embedvideo></nowiki></code> tag being broken.
 
 ; v2.2.9
 * Fixed issue with Twitch.tv switching over to HTTPS.
